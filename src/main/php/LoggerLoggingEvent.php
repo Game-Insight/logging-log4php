@@ -167,8 +167,11 @@ class LoggerLoggingEvent {
 				if(isset($hop['class'])) {
 					// we are sometimes in functions = no class available: avoid php warning here
 					$className = strtolower($hop['class']);
-					if(!empty($className) and ($className == 'lib\logger' or
-						strtolower(get_parent_class($className)) == 'lib\logger')) {
+					if (!empty($className) and
+						(($className == 'lib\logger' or strtolower(get_parent_class($className)) == 'lib\logger')
+							or
+						($className == 'propel' or strtolower(get_parent_class($className)) == 'propel')))
+					{
 						$locationInfo['line'] = $hop['line'];
 						$locationInfo['file'] = $hop['file'];
 						break;
